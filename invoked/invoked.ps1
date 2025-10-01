@@ -1,17 +1,13 @@
-# Исправленный тестовый скрипт
-Write-Host "=== Тестовый payload успешно выполнен! ===" -ForegroundColor Green
-$computerName = $env:COMPUTERNAME
-$currentTime = Get-Date
-$userName = $env:USERNAME
-
-# Записываем файл на рабочий стол
-"Тест выполнен на компьютере: $computerName" | Out-File -FilePath "C:\Users\tarin\Desktop\test_report.txt"
-"Время выполнения: $currentTime" | Out-File -FilePath "C:\Users\tarin\Desktop\test_report.txt" -Append
-"Пользователь: $userName" | Out-File -FilePath "C:\Users\tarin\Desktop\test_report.txt" -Append
-"=== УСПЕХ ===" | Out-File -FilePath "C:\Users\tarin\Desktop\test_report.txt" -Append
-
-# Дублируем в TEMP для надежности
-"Backup проверка: $currentTime" | Out-File -FilePath "$env:TEMP\backup_test.txt"
-
-Write-Host "Результат записан в C:\Users\tarin\Desktop\test_report.txt"
-Write-Host "Backup файл создан в: $env:TEMP\backup_test.txt"
+# Упрощенный тестовый скрипт
+try {
+    "УСПЕХ: Скрипт начал выполнение в $(Get-Date)" | Out-File "C:\Users\tarin\Desktop\debug_test.txt" -Encoding UTF8
+    "Компьютер: $env:COMPUTERNAME" | Out-File "C:\Users\tarin\Desktop\debug_test.txt" -Append
+    "Пользователь: $env:USERNAME" | Out-File "C:\Users\tarin\Desktop\debug_test.txt" -Append
+    
+    # Пробуем записать в несколько мест
+    "Резервная копия" | Out-File "$env:TEMP\debug_temp.txt" -Encoding UTF8
+    "Еще одна копия" | Out-File "C:\debug_root.txt" -Encoding UTF8
+    
+} catch {
+    "ОШИБКА: $($_.Exception.Message)" | Out-File "C:\Users\tarin\Desktop\error_log.txt" -Encoding UTF8
+}
